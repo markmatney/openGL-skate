@@ -10,9 +10,11 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #else
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#include "source/GL/glew.h"
+#include <GL/gl.h>
+#include <GL/glu.h>
 #endif
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,16 +24,21 @@
 #ifdef _WIN32
 #include "GL/freeglut.h"
 #else
-#include <GLUT/glut.h>
+#include <GL/glut.h>
 #endif
 
-#include "Ball.h"
-#include "FrameSaver.h"
-#include "Timer.h"
-#include "Shapes.h"
-#include "tga.h"
 
-#include "Angel/Angel.h"
+#include "source/Ball.h"
+#include "source/FrameSaver.h"
+#include "source/Timer.h"
+#include "source/Shapes.h"
+#include "source/tga.h"
+
+#include "source/Angel/Angel.h"
+
+
+
+
 
 #ifdef __APPLE__
 #define glutInitContextVersion(a,b)
