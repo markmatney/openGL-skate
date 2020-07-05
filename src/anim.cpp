@@ -4,34 +4,39 @@
 // CS 174A
 ////////////////////////////////////////////////////
 
-#ifdef WIN32
-#include <windows.h>
-#include "GL/glew.h"
-#include <GL/gl.h>
-#include <GL/glu.h>
-#else
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
 
 #ifdef WIN32
-#include "GL/freeglut.h"
-#else
-#include <GLUT/glut.h>
+#include <windows.h>
 #endif
 
-#include "Ball.h"
-#include "FrameSaver.h"
-#include "Timer.h"
-#include "Shapes.h"
-#include "tga.h"
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
-#include "Angel/Angel.h"
+#if defined(HAVE_FREEGLUT)
+
+#ifdef WIN32
+#include "../include/GL/freeglut.h"
+#else
+#include <GL/freeglut.h>
+#endif
+
+#else
+
+#include <GL/glut.h>
+
+#endif
+
+#include "../lib/Ball.h"
+#include "../lib/FrameSaver.h"
+#include "../lib/Timer.h"
+#include "../lib/Shapes.h"
+#include "../lib/tga.h"
+#include "../lib/Angel/Angel.h"
 
 #ifdef __APPLE__
 #define glutInitContextVersion(a,b)
@@ -254,7 +259,7 @@ void myKey(unsigned char key, int x, int y)
 void myinit(void)
 {
     // Load shaders and use the resulting shader program
-    GLuint program = InitShader( "vshader.glsl", "fshader.glsl" );
+    GLuint program = InitShader( "lib/vshader.glsl", "lib/fshader.glsl" );
     glUseProgram(program);
 
     // Generate vertex arrays for geometric shapes
@@ -286,14 +291,14 @@ void myinit(void)
     glEnable(GL_DEPTH_TEST);
 
     TgaImage coolImage;
-    if (!coolImage.loadTGA("challenge.tga"))
+    if (!coolImage.loadTGA("lib/img/challenge.tga"))
     {
         printf("Error loading image file\n");
         exit(1);
     }
 
     TgaImage earthImage;
-    if (!earthImage.loadTGA("earth.tga"))
+    if (!earthImage.loadTGA("lib/img/earth.tga"))
     {
         printf("Error loading image file\n");
         exit(1);
